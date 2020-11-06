@@ -1,24 +1,54 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { HashRouter as Router } from 'react-router-dom';
+import { makeStyles } from '@material-ui/core';
 
-function App() {
+import './App.css';
+import './assets/css/main.scss';
+import { Flip, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Map from './components/map/Map';
+
+const drawerWidth = 300
+
+const useStyles = makeStyles((theme) => ({
+  appBar: {
+    [theme.breakpoints.up('sm')]: {
+      width: `calc(100% - ${drawerWidth}px)`,
+      marginLeft: drawerWidth,
+    },
+  },
+}))
+
+const App = () => {
+  const classes = useStyles();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <ToastContainer
+        position="top-center"
+        transition={Flip}
+        autoClose={3000}
+        hideProgressBar
+        closeButton={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnVisibilityChange
+        draggable={false}
+        pauseOnHover
+      />
+      <div className="">
+        <Router>
+          <div>
+            <div className={classes.appBar}>
+              <div className="">
+                <Map />
+              </div>
+            </div>
+          </div>
+        </Router>
+      </div >
+    </>
   );
 }
 
